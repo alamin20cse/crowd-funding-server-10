@@ -10,8 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 
-// crowdFunding
-// EPRz7dJZrGxw7bAX
+
 
 
 
@@ -39,6 +38,7 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
 
 
 
