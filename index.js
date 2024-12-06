@@ -111,7 +111,7 @@ async function run() {
         
     })
 
-    // for user
+    // for donatedcollection user
     app.post('/donatedcollection',async(req,res)=>{
       const newDonatedUser=req.body;
       console.log(newDonatedUser);
@@ -119,6 +119,14 @@ async function run() {
       res.send(result);
     })
 
+    
+    app.get('/donatedcollection',async(req,res)=>{
+      const cursor=donatedCollection.find();
+      const result=await cursor.toArray();
+      res.send(result);
+
+
+  })
 
 
 
