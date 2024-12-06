@@ -49,7 +49,7 @@ async function run() {
 
 
     })
-
+// for delet operation
 
     app.delete('/campign:id',async(req,res)=>{
       const id=req.params.id;
@@ -58,6 +58,47 @@ async function run() {
       res.send(result);
 
     })
+
+    // for update
+    app.get('/campign/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await campignCollection.findOne(query);
+      res.send(result);
+    });
+    
+
+    app.put('/campign/:id', async (req, res) => {
+
+      const id=req.params.id;
+      const filter={_id:new ObjectId(id)}
+      const options = { upsert: true };
+
+      updatedCampaign=req.body;
+     campaign={
+
+        $set:{
+
+           imageUrl:updatedCampaign.imageUrl,
+           title:updatedCampaign.title,
+           type:updatedCampaign.type,
+           description:updatedCampaign.description,
+           minDonation:updatedCampaign.minDonation,
+           deadline:updatedCampaign.deadline,
+           email:updatedCampaign.email,
+           name:updatedCampaign.name,
+
+          
+        }
+      }
+      const result=await campignCollection.updateOne(filter,campaign,options);
+      res.send(result);
+
+
+    })
+
+    
+
 
 
 
