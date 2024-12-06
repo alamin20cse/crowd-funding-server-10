@@ -30,6 +30,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     const campignCollection=client.db('campignDB').collection('campign');
+    const donatedCollection=client.db('campignDB').collection('donatedcollection')
 
 
 
@@ -40,6 +41,18 @@ async function run() {
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
 
+
+    app.get('/campign',async(req,res)=>{
+        const cursor=campignCollection.find();
+        const result=await cursor.toArray();
+        res.send(result);
+
+
+    })
+
+
+
+
     app.post('/campign',async(req,res)=>{
         const newCampign=req.body;
         console.log(newCampign);
@@ -47,6 +60,14 @@ async function run() {
         res.send(result);
 
         
+    })
+
+    // for user
+    app.post('/donatedcollection',async(req,res)=>{
+      const newDonatedUser=req.body;
+      console.log(newDonatedUser);
+      const result=await donatedCollection.insertOne(newDonatedUser);
+      res.send(result);
     })
 
 
