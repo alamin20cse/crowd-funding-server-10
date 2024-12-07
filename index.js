@@ -76,6 +76,7 @@ async function run() {
       const options = { upsert: true };
 
       updatedCampaign=req.body;
+      
      campaign={
 
         $set:{
